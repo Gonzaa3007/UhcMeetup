@@ -8,15 +8,17 @@ import fr.mrmicky.fastinv.ItemBuilder
 import org.bukkit.Material
 import org.bukkit.entity.Player
 
-class StatsGui(p: Player): FastInv(9, "Stats") {
+class StatsGui(player: Player): FastInv(9, "Stats") {
     val pl = UhcMeetup.pl
+    val stats = StatsManager.getInstance()
 
     init {
-        addItem(ItemBuilder(Material.GOLD_BLOCK).name(Utils.chat("&aWins: ${StatsManager.WINS.getValue(p)}")).build())
-        addItem(ItemBuilder(Material.SKELETON_SKULL).name(Utils.chat("&cDeaths: ${StatsManager.DEATHS.getValue(p)}")).build())
-        addItem(ItemBuilder(Material.IRON_SWORD).name(Utils.chat("&cKills: ${StatsManager.KILLS.getValue(p)}")).build())
-        addItem(ItemBuilder(Material.GOLDEN_APPLE).name(Utils.chat("&6Gapps Eaten: ${StatsManager.GAPPS.getValue(p)}")).build())
-        addItem(ItemBuilder(Material.GRASS_BLOCK).name(Utils.chat("&aGames Played: ${StatsManager.PLAYED.getValue(p)}")).build())
+        val p = pl.pm.getUhcPlayer(player)
+        addItem(ItemBuilder(Material.GOLD_BLOCK).name(Utils.chat("&aWins: ${stats.getValue(p, StatsManager.Stats.WINS)}")).build())
+        addItem(ItemBuilder(Material.SKELETON_SKULL).name(Utils.chat("&cDeaths: ${stats.getValue(p, StatsManager.Stats.DEATHS)}")).build())
+        addItem(ItemBuilder(Material.IRON_SWORD).name(Utils.chat("&cKills: ${stats.getValue(p, StatsManager.Stats.KILLS)}")).build())
+        addItem(ItemBuilder(Material.GOLDEN_APPLE).name(Utils.chat("&6Gapps Eaten: ${stats.getValue(p, StatsManager.Stats.GAPPS)}")).build())
+        addItem(ItemBuilder(Material.GRASS_BLOCK).name(Utils.chat("&aGames Played: ${stats.getValue(p, StatsManager.Stats.PLAYED)}")).build())
 
         addOpenHandler { e -> e.player.sendMessage(Utils.chat("${pl.prefix}Opening ${p.name}'s stats...")) }
         addClickHandler {e -> e.isCancelled = true}

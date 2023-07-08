@@ -33,7 +33,7 @@ class DeathListener: Listener {
             }
             p.setState(PlayerState.SPECTATING)
             pl.pm.checkIfRemainingPlayers()
-            StatsManager.DEATHS.add(p.getPlayer())
+            StatsManager.getInstance().add(p, StatsManager.Stats.DEATHS)
             Utils.delay(1) {
                 p.getPlayer().teleport(Location(world.getMeetupWorld(),0.0,100.0,0.0))
                 p.getPlayer().gameMode = GameMode.SPECTATOR

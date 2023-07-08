@@ -25,7 +25,7 @@ class ConsumeListener: Listener {
         val p = pl.pm.getUhcPlayer(e.player)
         if (game.getState() == GameState.STARTED) {
             if (e.item.type == Material.GOLDEN_APPLE)
-                StatsManager.GAPPS.add(p.getPlayer())
+                StatsManager.getInstance().add(p, StatsManager.Stats.GAPPS)
         }
 
         if (e.item.isSimilar(Utils.goldenHead())) {

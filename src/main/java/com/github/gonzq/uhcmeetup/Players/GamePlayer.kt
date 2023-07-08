@@ -30,7 +30,7 @@ class GamePlayer (var uid: UUID, var name: String) {
         kills = 0
         isVoteScen = false
         state = PlayerState.WAITING
-        file = PlayerFile(uid)
+        file = PlayerFile.get(uid)
     }
 
     fun getPlayer(): Player {
@@ -74,7 +74,7 @@ class GamePlayer (var uid: UUID, var name: String) {
     }
 
     fun addKill() {
-        StatsManager.KILLS.add(getPlayer())
+        StatsManager.getInstance().add(this, StatsManager.Stats.KILLS)
         kills++
     }
 

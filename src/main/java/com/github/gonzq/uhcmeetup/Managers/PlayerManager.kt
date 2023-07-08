@@ -78,7 +78,7 @@ class PlayerManager {
         val winner = getWinner()
         val pl = UhcMeetup.pl
         Bukkit.broadcastMessage(Utils.chat(pl.prefix + pl.lang.getConfig().getString("win-solo")).replace("%player%", winner.name).replace("%kills%", "${winner.getKills()}"))
-        StatsManager.WINS.add(winner.getPlayer())
+        StatsManager.getInstance().add(winner, StatsManager.Stats.WINS)
         manager.setState(GameState.FINALIZED)
         pl.boards.values.forEach{f -> f.updateLines(mutableListOf())}
         Bukkit.broadcastMessage(Utils.chat(pl.prefix + pl.lang.getConfig().getString("server-restart")!!

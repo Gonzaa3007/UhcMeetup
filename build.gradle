@@ -31,7 +31,7 @@ dependencies {
     implementation 'fr.mrmicky:fastboard:2.0.0'
     implementation 'fr.mrmicky:fastinv:3.0.4'
     implementation 'com.jeff_media:SpigotUpdateChecker:3.0.3'
-    //implementation 'com.github.KayTeam-Studio:mysql-util:1.2.3'
+    implementation 'com.github.KayTeam-Studio:mysql-util:1.2.3'
 }
 
 shadowJar {

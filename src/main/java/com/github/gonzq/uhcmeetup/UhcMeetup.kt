@@ -1,6 +1,7 @@
 package com.github.gonzq.uhcmeetup
 
 import com.github.gonzq.uhcmeetup.File.CFiles
+import com.github.gonzq.uhcmeetup.Managers.StatsManager
 import com.github.gonzq.uhcmeetup.Managers.PlayerManager
 import com.github.gonzq.uhcmeetup.Managers.WorldManager
 import com.github.gonzq.uhcmeetup.Tasks.ScoreboardTask
@@ -43,6 +44,7 @@ class UhcMeetup : JavaPlugin() {
 
         prefix = Utils.chat(lang.getConfig().getString("prefix"))
         borderPrefix = Utils.chat(lang.getConfig().getString("border-prefix"))
+        StatsManager.getInstance().setUpStats()
         pm = PlayerManager()
         FastInvManager.register(this)
         WorldManager.getInstance().deleteWorld()
@@ -71,5 +73,6 @@ class UhcMeetup : JavaPlugin() {
         // Plugin shutdown logic
         Bukkit.getScoreboardManager()!!.mainScoreboard.objectives.forEach(Objective::unregister)
         WorldManager.getInstance().deleteWorld()
+        StatsManager.getInstance().saveStats()
     }
 }
