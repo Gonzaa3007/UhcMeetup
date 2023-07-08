@@ -42,7 +42,7 @@ class ScatterManager {
         p.getPlayer().activePotionEffects.forEach { pe -> p.getPlayer().removePotionEffect(pe.type) }
         p.setState(PlayerState.PLAYING)
         p.getPlayer().isInvulnerable = false
-        StatsManager.PLAYED.add(p.getPlayer())
+        StatsManager.getInstance().add(p, StatsManager.Stats.PLAYED)
     }
 
     fun calculateCoords(): Location {
