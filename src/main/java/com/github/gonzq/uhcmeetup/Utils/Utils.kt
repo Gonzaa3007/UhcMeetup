@@ -108,6 +108,7 @@ open class Utils {
             FightsListener()
             HubListener()
             InteractListener()
+            ShootListener()
 
             // Commands
             MeetupCMD()
