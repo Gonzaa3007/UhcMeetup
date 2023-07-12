@@ -12,9 +12,7 @@ import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 import java.util.Random
 
-
 class ScatterManager {
-    private var pl = UhcMeetup.pl
 
     companion object {
         private var instance = ScatterManager()
@@ -45,7 +43,7 @@ class ScatterManager {
         StatsManager.getInstance().add(p, StatsManager.Stats.PLAYED)
     }
 
-    fun calculateCoords(): Location {
+    private fun calculateCoords(): Location {
         val wm = WorldManager.getInstance()
         val rand = Random()
         val upperbound = wm.getBorder()

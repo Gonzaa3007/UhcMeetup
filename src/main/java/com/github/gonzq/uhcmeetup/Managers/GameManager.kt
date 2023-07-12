@@ -5,7 +5,6 @@ import com.github.gonzq.uhcmeetup.Players.GamePlayer
 import com.github.gonzq.uhcmeetup.Tasks.CountdownTask
 import com.github.gonzq.uhcmeetup.UhcMeetup
 import com.github.gonzq.uhcmeetup.Utils.Utils
-import org.kayteam.mysqlutil.SimpleMySql
 
 open class GameManager {
     private var pl: UhcMeetup = UhcMeetup.pl
@@ -26,7 +25,6 @@ open class GameManager {
 
     private var countdown: Int = pl.config.getConfig().getInt("countdown-time")
     fun getCountdown(): Int {
-        val sql = SimpleMySql("","","","","").createTable("","")
         return countdown
     }
     fun restCountdown() {

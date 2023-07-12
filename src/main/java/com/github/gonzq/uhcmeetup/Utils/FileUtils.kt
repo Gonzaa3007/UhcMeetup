@@ -8,7 +8,7 @@ import java.io.File
 open class FileUtils {
 
     companion object {
-        public open fun getConfigs(): List<FileConfiguration> {
+        fun getConfigs(): List<FileConfiguration> {
             val l: ArrayList<FileConfiguration> = ArrayList()
             File(UhcMeetup.pl.dataFolder.absolutePath + File.separator + "players").listFiles()!!.forEach { file ->
                 l.add(YamlConfiguration.loadConfiguration(file))

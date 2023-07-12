@@ -29,6 +29,7 @@ class ScenarioManager {
         scenarios.add(NoClean(pl, pl.config.getConfig().getInt("noclean-time")))
         scenarios.add(TimeBomb())
         scenarios.add(WebCage())
+        scenarios.add(FireLess())
         GameManager.getInstance().getVoteScenarios()
     }
 

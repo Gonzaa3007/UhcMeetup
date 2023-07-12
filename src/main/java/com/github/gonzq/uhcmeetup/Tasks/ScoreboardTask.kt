@@ -21,7 +21,7 @@ class ScoreboardTask: BukkitRunnable() {
 
     override fun run() {
         pl.boards.values.forEach {f ->
-            f.updateTitle(pl.board.getConfig().getString("scoreboard.title"))
+            f.updateTitle(Utils.chat(pl.board.getConfig().getString("scoreboard.title")))
             val lines: List<String> = when (GameManager.getInstance().getState()) {
                 GameState.WAITING -> pl.board.getConfig().getStringList("scoreboard.lobby")
                 GameState.STARTING -> pl.board.getConfig().getStringList("scoreboard.starting")

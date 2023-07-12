@@ -16,54 +16,55 @@ class CountdownTask: BukkitRunnable() {
     private var pl = UhcMeetup.pl
     private var msg = pl.lang.getConfig().getString("countdown-msg")!!
     private var votemsg = pl.lang.getConfig().getString("vote-msg")!!
-    private var vote = pl.lang.getConfig().getBoolean("vote-system.scenario-system")
+    private var vote = pl.config.getConfig().getBoolean("vote-system.scenario-system")
     private var g = GameManager.getInstance()
 
     override fun run() {
         if (g.getCountdown() == 60) {
             Bukkit.broadcastMessage(Utils.chat(pl.prefix + msg.replace("%time%", "60")))
-            if (vote) pl.pm.getPlayerList().stream().filter(GamePlayer::isOnline).filter { p -> !p.isVotedScen()}
-                .filter {p -> p.getPlayer().hasPermission("meetup.vote")}.forEach {p ->
+            if (vote) pl.pm.getPlayerList().stream().filter(GamePlayer::isOnline).filter { p -> !p.isVotedScen() }
+                .filter { p -> p.getPlayer().hasPermission("meetup.vote") }.forEach { p ->
                     p.getPlayer().sendMessage(Utils.chat(pl.prefix + votemsg))}
+        }
 
             if (g.getCountdown() == 30) {
-                Bukkit.broadcastMessage(Utils.chat(pl.prefix + msg.replace("%time%", "60")))
+                Bukkit.broadcastMessage(Utils.chat(pl.prefix + msg.replace("%time%", "30")))
                 if (vote) pl.pm.getPlayerList().stream().filter(GamePlayer::isOnline).filter { p -> !p.isVotedScen()}
                     .filter {p -> p.getPlayer().hasPermission("meetup.vote")}.forEach {p ->
                         p.getPlayer().sendMessage(Utils.chat(pl.prefix + votemsg))}
             }
             if (g.getCountdown() == 10) {
-                Bukkit.broadcastMessage(Utils.chat(pl.prefix + msg.replace("%time%", "60")))
+                Bukkit.broadcastMessage(Utils.chat(pl.prefix + msg.replace("%time%", "10")))
                 if (vote) pl.pm.getPlayerList().stream().filter(GamePlayer::isOnline).filter { p -> !p.isVotedScen()}
                     .filter {p -> p.getPlayer().hasPermission("meetup.vote")}.forEach {p ->
                         p.getPlayer().sendMessage(Utils.chat(pl.prefix + votemsg))}
             }
             if (g.getCountdown() == 5) {
-                Bukkit.broadcastMessage(Utils.chat(pl.prefix + msg.replace("%time%", "60")))
+                Bukkit.broadcastMessage(Utils.chat(pl.prefix + msg.replace("%time%", "5")))
                 if (vote) pl.pm.getPlayerList().stream().filter(GamePlayer::isOnline).filter { p -> !p.isVotedScen()}
                     .filter {p -> p.getPlayer().hasPermission("meetup.vote")}.forEach {p ->
                         p.getPlayer().sendMessage(Utils.chat(pl.prefix + votemsg))}
             }
             if (g.getCountdown() == 4) {
-                Bukkit.broadcastMessage(Utils.chat(pl.prefix + msg.replace("%time%", "60")))
+                Bukkit.broadcastMessage(Utils.chat(pl.prefix + msg.replace("%time%", "4")))
                 if (vote) pl.pm.getPlayerList().stream().filter(GamePlayer::isOnline).filter { p -> !p.isVotedScen()}
                     .filter {p -> p.getPlayer().hasPermission("meetup.vote")}.forEach {p ->
                         p.getPlayer().sendMessage(Utils.chat(pl.prefix + votemsg))}
             }
             if (g.getCountdown() == 3) {
-                Bukkit.broadcastMessage(Utils.chat(pl.prefix + msg.replace("%time%", "60")))
+                Bukkit.broadcastMessage(Utils.chat(pl.prefix + msg.replace("%time%", "3")))
                 if (vote) pl.pm.getPlayerList().stream().filter(GamePlayer::isOnline).filter { p -> !p.isVotedScen()}
                     .filter {p -> p.getPlayer().hasPermission("meetup.vote")}.forEach {p ->
                         p.getPlayer().sendMessage(Utils.chat(pl.prefix + votemsg))}
             }
             if (g.getCountdown() == 2) {
-                Bukkit.broadcastMessage(Utils.chat(pl.prefix + msg.replace("%time%", "60")))
+                Bukkit.broadcastMessage(Utils.chat(pl.prefix + msg.replace("%time%", "2")))
                 if (vote) pl.pm.getPlayerList().stream().filter(GamePlayer::isOnline).filter { p -> !p.isVotedScen()}
                     .filter {p -> p.getPlayer().hasPermission("meetup.vote")}.forEach {p ->
                         p.getPlayer().sendMessage(Utils.chat(pl.prefix + votemsg))}
             }
             if (g.getCountdown() == 1) {
-                Bukkit.broadcastMessage(Utils.chat(pl.prefix + msg.replace("%time%", "60")))
+                Bukkit.broadcastMessage(Utils.chat(pl.prefix + msg.replace("%time%", "1")))
                 if (vote) pl.pm.getPlayerList().stream().filter(GamePlayer::isOnline).filter { p -> !p.isVotedScen()}
                     .filter {p -> p.getPlayer().hasPermission("meetup.vote")}.forEach {p ->
                         p.getPlayer().sendMessage(Utils.chat(pl.prefix + votemsg))}
@@ -80,7 +81,6 @@ class CountdownTask: BukkitRunnable() {
                 cancel()
             }
             g.restCountdown()
-        }
     }
 
 }

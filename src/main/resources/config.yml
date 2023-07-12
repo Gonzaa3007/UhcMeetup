@@ -18,6 +18,7 @@ vote-system:
     - "TimeBomb"
     - "WebCage"
     - "HeavyPockets"
+    - "FireLess"
 
 # Scenarios that will be enabled every time the server starts.
 default-scenarios-enabled:
@@ -45,3 +46,7 @@ shield-break-sound: true
 scenarios-gui:
   scenarios-name: "&b%name%"
 noclean-time: 30
+bungee-support:
+  send-to-hub:
+    enable: true
+    server-name: "lobby"

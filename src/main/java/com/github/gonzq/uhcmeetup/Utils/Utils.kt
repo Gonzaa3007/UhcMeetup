@@ -4,13 +4,17 @@ import com.github.gonzq.uhcmeetup.Commands.*
 import com.github.gonzq.uhcmeetup.Listeners.*
 import com.github.gonzq.uhcmeetup.Managers.ScenarioManager
 import com.github.gonzq.uhcmeetup.UhcMeetup
+import com.google.common.io.ByteStreams
 import fr.mrmicky.fastinv.ItemBuilder
 import net.md_5.bungee.api.ChatColor
 import org.bukkit.Bukkit
 import org.bukkit.Material
+import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import org.bukkit.scoreboard.DisplaySlot
 import org.bukkit.scoreboard.RenderType
+import java.io.ByteArrayOutputStream
+import java.io.DataOutputStream
 import java.util.*
 import java.util.regex.Matcher
 import java.util.regex.Pattern
@@ -78,10 +82,23 @@ open class Utils {
             }
         }
 
+        fun sendToBungeeHub(p: Player, server: String) {
+            try {
+                val b = ByteArrayOutputStream()
+                val out = DataOutputStream(b)
+                out.writeUTF("Connect")
+                out.writeUTF(server)
+                p.sendPluginMessage(UhcMeetup.pl, "BungeeCord", b.toByteArray())
+                b.close()
+                out.close()
+            } catch (ignored: Exception) {}
+        }
+
         fun registerAll() {
+            val pl = UhcMeetup.pl
             val scen = ScenarioManager.getInstance()
             scen.setup()
-            UhcMeetup.pl.config.getConfig().getStringList("default-scenarios-enabled").forEach { s ->
+            pl.config.getConfig().getStringList("default-scenarios-enabled").forEach { s ->
                 scen.getScenario(s)?.enable()
             }
 
@@ -99,6 +116,20 @@ open class Utils {
             StatsCMD()
             VoteCMD()
             ForceStartCMD()
+
+
+            // Database
+            val c = pl.databases.getConfig()
+            if (pl.isMysql) {
+                Bukkit.getScheduler().runTaskAsynchronously(pl, Runnable {
+                    pl.mysql = MySqlUtils(c.getString("databases.mysql.host")!!,c.getString("databases.mysql.port")!!,
+                        c.getString("databases.mysql.database")!!, c.getString("databases.mysql.user")!!,
+                        c.getString("databases.mysql.password")!!)
+
+                    pl.mysql.connect()
+                    pl.mysql.createTable()
+                })
+            }
         }
     }
 }

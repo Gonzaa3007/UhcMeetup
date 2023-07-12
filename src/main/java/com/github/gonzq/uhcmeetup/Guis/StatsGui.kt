@@ -18,6 +18,7 @@ class StatsGui(player: Player): FastInv(9, "Stats") {
         addItem(ItemBuilder(Material.SKELETON_SKULL).name(Utils.chat("&cDeaths: ${stats.getValue(p, StatsManager.Stats.DEATHS)}")).build())
         addItem(ItemBuilder(Material.IRON_SWORD).name(Utils.chat("&cKills: ${stats.getValue(p, StatsManager.Stats.KILLS)}")).build())
         addItem(ItemBuilder(Material.GOLDEN_APPLE).name(Utils.chat("&6Gapps Eaten: ${stats.getValue(p, StatsManager.Stats.GAPPS)}")).build())
+        addItem(ItemBuilder(Material.ARROW).name(Utils.chat("&bBow Shoots: ${stats.getValue(p, StatsManager.Stats.BOW_SHOOTS)}")).build())
         addItem(ItemBuilder(Material.GRASS_BLOCK).name(Utils.chat("&aGames Played: ${stats.getValue(p, StatsManager.Stats.PLAYED)}")).build())
 
         addOpenHandler { e -> e.player.sendMessage(Utils.chat("${pl.prefix}Opening ${p.name}'s stats...")) }

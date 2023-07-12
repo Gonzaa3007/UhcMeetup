@@ -48,7 +48,7 @@ class WorldManager {
         if (getLobby() == null) {
             val creator = WorldCreator(pl.config.getConfig().getString("lobby.name")!!)
             creator.type(WorldType.FLAT)
-            creator.generateStructures(true)
+            creator.generateStructures(false)
             val w = creator.createWorld()!!
             w.difficulty = Difficulty.PEACEFUL
             w.setGameRule(GameRule.ANNOUNCE_ADVANCEMENTS,false)
@@ -74,7 +74,7 @@ class WorldManager {
 
     private fun deleteFile(path: File): Boolean{
         if (path.exists()) {
-            var files = path.listFiles()
+            val files = path.listFiles()
             if (files != null) {
                 Arrays.stream(files).forEach(this::deleteFile)
             }

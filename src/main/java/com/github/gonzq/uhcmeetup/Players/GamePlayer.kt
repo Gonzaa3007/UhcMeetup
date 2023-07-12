@@ -20,14 +20,12 @@ import java.util.UUID
 import kotlin.properties.Delegates
 
 class GamePlayer (var uid: UUID, var name: String) {
-    private lateinit var state: PlayerState
-    private var kills: Int
+    private var state: PlayerState
+    private var kills: Int = 0
     private var isVoteScen: Boolean
     private var file: PlayerFile
 
     init {
-        state
-        kills = 0
         isVoteScen = false
         state = PlayerState.WAITING
         file = PlayerFile.get(uid)
@@ -93,7 +91,7 @@ class GamePlayer (var uid: UUID, var name: String) {
             val hNumber = Utils.getRandomInt(c.getConfigurationSection("$armorKey.helmets")!!.getKeys(false).size)
             helmet = ItemStack(Material.valueOf(c.getString("$armorKey.helmets.$hNumber.item")!!))
             if (c.getString("$armorKey.helmets.$hNumber.enchants") != "none") {
-                c.getString("$armorKey.helmets$hNumber.enchants")!!.split(";").forEach { s ->
+                c.getString("$armorKey.helmets.$hNumber.enchants")!!.split(";").forEach { s ->
                     val enchant = s.split("-")
                     helmet.addEnchantment(Enchantment.getByName(enchant[0])!!, enchant[1].toInt())
                 }
@@ -131,7 +129,7 @@ class GamePlayer (var uid: UUID, var name: String) {
             val bNumber = Utils.getRandomInt(c.getConfigurationSection("$armorKey.boots")!!.getKeys(false).size)
             boots = ItemStack(Material.valueOf(c.getString("$armorKey.boots.$bNumber.item")!!))
             if (c.getString("$armorKey.boots.$bNumber.enchants") != "none") {
-                c.getString("$armorKey.leggings.$bNumber.enchants")!!.split(";").forEach{s ->
+                c.getString("$armorKey.boots.$bNumber.enchants")!!.split(";").forEach{s ->
                     val enchant = s.split("-")
                     boots.addEnchantment(Enchantment.getByName(enchant[0])!!, enchant[1].toInt())
                 }

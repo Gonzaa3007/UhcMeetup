@@ -8,7 +8,6 @@ import org.bukkit.Bukkit
 import java.util.UUID
 
 class StatsManager {
-
     companion object{
         private val instance = StatsManager()
         fun getInstance(): StatsManager {
@@ -16,11 +15,12 @@ class StatsManager {
         }
     }
 
-    private val kills = mutableMapOf<UUID, Int>()
-    private val deaths = mutableMapOf<UUID, Int>()
-    private val wins = mutableMapOf<UUID, Int>()
-    private val gapps = mutableMapOf<UUID, Int>()
-    private val played = mutableMapOf<UUID, Int>()
+    val kills = mutableMapOf<UUID, Int>()
+    val deaths = mutableMapOf<UUID, Int>()
+    val wins = mutableMapOf<UUID, Int>()
+    val gapps = mutableMapOf<UUID, Int>()
+    val played = mutableMapOf<UUID, Int>()
+    val shoots = mutableMapOf<UUID, Int>()
 
     fun getValue(p: GamePlayer, stat: Stats): Int {
 
@@ -30,6 +30,7 @@ class StatsManager {
             Stats.WINS -> wins.getOrPut(p.uid){0}
             Stats.GAPPS -> gapps.getOrPut(p.uid){0}
             Stats.PLAYED -> played.getOrPut(p.uid){0}
+            Stats.BOW_SHOOTS -> shoots.getOrPut(p.uid){0}
         }
     }
 
@@ -40,6 +41,7 @@ class StatsManager {
             Stats.WINS -> wins[p.uid] = wins.getOrPut(p.uid){0} + 1
             Stats.GAPPS -> gapps[p.uid] = gapps.getOrPut(p.uid){0} + 1
             Stats.PLAYED -> played[p.uid] = played.getOrPut(p.uid){0} + 1
+            Stats.BOW_SHOOTS -> shoots[p.uid] = shoots.getOrPut(p.uid){0} + 1
         }
     }
 
@@ -51,6 +53,7 @@ class StatsManager {
             Stats.WINS -> wins
             Stats.GAPPS -> gapps
             Stats.PLAYED -> played
+            Stats.BOW_SHOOTS -> shoots
         }
 
         val entry: List<Map.Entry<UUID, Int>> = hash.entries.stream().sorted(java.util.Map.Entry.comparingByValue(Comparator.reverseOrder()))
@@ -65,6 +68,20 @@ class StatsManager {
         return list
     }
 
+    fun getTopList(stat: Stats): MutableList<MutableMap.MutableEntry<String, Int>> {
+        val hash = when(stat) {
+            Stats.KILLS -> kills
+            Stats.DEATHS -> deaths
+            Stats.WINS -> wins
+            Stats.GAPPS -> gapps
+            Stats.PLAYED -> played
+            Stats.BOW_SHOOTS -> shoots
+        }
+        val newHash = mutableMapOf<String, Int>()
+        hash.keys.forEach{uid -> newHash[Bukkit.getOfflinePlayer(uid).name!!] = hash[uid]!! }
+        return newHash.entries.stream().sorted(java.util.Map.Entry.comparingByValue(Comparator.reverseOrder())).limit(10).toList()
+    }
+
     fun setUpStats() {
         Bukkit.getScheduler().runTaskAsynchronously(UhcMeetup.pl, Runnable {
             for (p in Bukkit.getOfflinePlayers()) {
@@ -74,20 +91,32 @@ class StatsManager {
                 wins[p.uniqueId] = file.c().getInt("stats.wins",0)
                 gapps[p.uniqueId] = file.c().getInt("stats.gapps",0)
                 played[p.uniqueId] = file.c().getInt("stats.played",0)
+                shoots[p.uniqueId] = file.c().getInt("stats.bow-shoots",0)
             }
             Bukkit.getLogger().info("Stats has been setted")
         })
     }
 
     fun saveStats() {
+        val pl = UhcMeetup.pl
         for (p in Bukkit.getOfflinePlayers()) {
-            val file = PlayerFile.get(p.uniqueId)
-            file.c().set("stats.kills", kills.getOrPut(p.uniqueId){0})
-            file.c().set("stats.deaths", deaths.getOrPut(p.uniqueId){0})
-            file.c().set("stats.wins", wins.getOrPut(p.uniqueId){0})
-            file.c().set("stats.gapps", gapps.getOrPut(p.uniqueId){0})
-            file.c().set("stats.played", played.getOrPut(p.uniqueId){0})
+            val uid = p.uniqueId
+            val file = PlayerFile.get(uid)
+            file.c().set("stats.kills", kills.getOrPut(uid){0})
+            file.c().set("stats.deaths", deaths.getOrPut(uid){0})
+            file.c().set("stats.wins", wins.getOrPut(uid){0})
+            file.c().set("stats.gapps", gapps.getOrPut(uid){0})
+            file.c().set("stats.bow-shoots", shoots.getOrPut(uid){0})
+            file.c().set("stats.played", played.getOrPut(uid){0})
             file.save()
+
+            if (pl.isMysql) {
+                if (pl.mysql.playerIsInTable(uid)) {
+                    pl.mysql.updatePlayer(uid)
+                } else {
+                    pl.mysql.insertPlayer(uid)
+                }
+            }
         }
     }
 
@@ -97,6 +126,7 @@ class StatsManager {
         DEATHS,
         WINS,
         GAPPS,
+        BOW_SHOOTS,
         PLAYED
     }
 }

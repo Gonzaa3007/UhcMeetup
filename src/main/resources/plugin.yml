@@ -1,9 +1,9 @@
 name: UhcMeetup
-version: 1.0
+version: 1.2
 main: com.github.gonzq.uhcmeetup.UhcMeetup
 api-version: 1.17
 softdepend: [PlaceholderAPI]
-authors: [! Gonza#4451]
+author: ! Gonzq#4451
 description: An UhcMeetup plugin for Minecraft 1.17.x
 website: https://github.com/Gonzaa3007
 

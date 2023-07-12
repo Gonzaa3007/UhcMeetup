@@ -14,13 +14,17 @@ class PlayerManager {
 
     private var players: MutableList<GamePlayer> = mutableListOf()
 
-    fun doesPlayerExist(p: Player): Boolean {
-        try {
+    private fun doesPlayerExist(p: Player): Boolean {
+        for (up in players) {
+            if (up.uid == p.uniqueId) return true
+        }
+      /*  try {
             getUhcPlayer(p.uniqueId)
             return true
         } catch (e: GamePlayerDoesNotExistException) {
             throw RuntimeException(e)
-        }
+        }*/
+        return false
     }
 
     fun getUhcPlayer(p: Player): GamePlayer {

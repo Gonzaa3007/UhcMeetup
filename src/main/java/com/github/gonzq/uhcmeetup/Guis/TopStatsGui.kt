@@ -15,10 +15,11 @@ class TopStatsGui(player: Player): FastInv(9, "Top Stats") {
 
     init {
         val p = pl.pm.getUhcPlayer(player)
-        addItem(ItemBuilder(Material.GOLD_BLOCK).name(Utils.chat("&aTop Wins:")).lore(stats.getTop(StatsManager.Stats.WINS)).build())
-        addItem(ItemBuilder(Material.SKELETON_SKULL).name(Utils.chat("&cTop Deaths:")).lore(stats.getTop(StatsManager.Stats.DEATHS)).build())
-        addItem(ItemBuilder(Material.IRON_SWORD).name(Utils.chat("&cTop Kills:")).lore(stats.getTop(StatsManager.Stats.KILLS)).build())
+        addItem(ItemBuilder(Material.GOLD_BLOCK).name(Utils.chat("&aTop Wins")).lore(stats.getTop(StatsManager.Stats.WINS)).build())
+        addItem(ItemBuilder(Material.SKELETON_SKULL).name(Utils.chat("&cTop Deaths")).lore(stats.getTop(StatsManager.Stats.DEATHS)).build())
+        addItem(ItemBuilder(Material.IRON_SWORD).name(Utils.chat("&cTop Kills")).lore(stats.getTop(StatsManager.Stats.KILLS)).build())
         addItem(ItemBuilder(Material.GOLDEN_APPLE).name(Utils.chat("&6Top Gapps Eaten")).lore(stats.getTop(StatsManager.Stats.GAPPS)).build())
+        addItem(ItemBuilder(Material.ARROW).name(Utils.chat("&bTop Bow Shoots")).lore(stats.getTop(StatsManager.Stats.BOW_SHOOTS)).build())
         addItem(ItemBuilder(Material.GRASS_BLOCK).name(Utils.chat("&aTop Games Played")).lore(stats.getTop(StatsManager.Stats.PLAYED)).build())
         addClickHandler{e -> e.isCancelled = true}
     }
