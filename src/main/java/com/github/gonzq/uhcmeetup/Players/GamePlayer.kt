@@ -206,7 +206,7 @@ class GamePlayer (var uid: UUID, var name: String) {
             }
 
             if (Utils.getRandomInt(100) - c.getInt("kits.potions.poison-chance") <= 1) {
-                val potion = ItemStack(Material.POTION)
+                val potion = ItemStack(Material.SPLASH_POTION)
                 val meta = potion.itemMeta as PotionMeta
                 meta.basePotionData = PotionData(PotionType.POISON)
                 potion.setItemMeta(meta)

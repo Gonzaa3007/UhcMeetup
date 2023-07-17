@@ -4,11 +4,12 @@ import com.github.gonzq.uhcmeetup.Scenarios.Scenario
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
+import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.inventory.ItemStack
 
 class FireLess: Scenario("FireLess", ItemStack(Material.LAVA_BUCKET),
-"&7You can't get fire damage") {
+"&7You can't get fire damage"), Listener {
     private var b = false
 
     @EventHandler
@@ -17,7 +18,9 @@ class FireLess: Scenario("FireLess", ItemStack(Material.LAVA_BUCKET),
             when (e.cause) {
                 EntityDamageEvent.DamageCause.FIRE,
                     EntityDamageEvent.DamageCause.FIRE_TICK,
-                    EntityDamageEvent.DamageCause.LAVA -> e.isCancelled = true
+                    EntityDamageEvent.DamageCause.LAVA -> {
+                        e.isCancelled = true
+                }
                 else -> {}
             }
         }

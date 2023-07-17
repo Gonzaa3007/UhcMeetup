@@ -83,18 +83,16 @@ class StatsManager {
     }
 
     fun setUpStats() {
-        Bukkit.getScheduler().runTaskAsynchronously(UhcMeetup.pl, Runnable {
-            for (p in Bukkit.getOfflinePlayers()) {
-                val file = PlayerFile.get(p.uniqueId)
-                kills[p.uniqueId] = file.c().getInt("stats.kills",0)
-                deaths[p.uniqueId] = file.c().getInt("stats.deaths",0)
-                wins[p.uniqueId] = file.c().getInt("stats.wins",0)
-                gapps[p.uniqueId] = file.c().getInt("stats.gapps",0)
-                played[p.uniqueId] = file.c().getInt("stats.played",0)
-                shoots[p.uniqueId] = file.c().getInt("stats.bow-shoots",0)
-            }
-            Bukkit.getLogger().info("Stats has been setted")
-        })
+        for (p in Bukkit.getOfflinePlayers()) {
+            val file = PlayerFile.get(p.uniqueId)
+            kills[p.uniqueId] = file.c().getInt("stats.kills", 0)
+            deaths[p.uniqueId] = file.c().getInt("stats.deaths", 0)
+            wins[p.uniqueId] = file.c().getInt("stats.wins", 0)
+            gapps[p.uniqueId] = file.c().getInt("stats.gapps", 0)
+            played[p.uniqueId] = file.c().getInt("stats.played", 0)
+            shoots[p.uniqueId] = file.c().getInt("stats.bow-shoots", 0)
+        }
+        Bukkit.getLogger().info("Stats has been setted")
     }
 
     fun saveStats() {

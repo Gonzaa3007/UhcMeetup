@@ -74,7 +74,7 @@ class UhcMeetup : JavaPlugin() {
         } else {
             papi = true
             Placeholders().register()
-            PlaceholdersStats().register()
+       //     PlaceholdersStats().register()
         }
         Utils.setObjectives()
         Utils.registerAll()
@@ -83,12 +83,18 @@ class UhcMeetup : JavaPlugin() {
     override fun onDisable() {
         // Plugin shutdown logic
         if (config.getConfig().getBoolean("bungee-support.send-to-hub.enable")) {
-            Bukkit.getOnlinePlayers().forEach{p -> Utils.sendToBungeeHub(p, config.getConfig()
-                .getString("bungee-support.send-to-hub.server-name")!!)}
+            Bukkit.getOnlinePlayers().forEach { p ->
+                Utils.sendToBungeeHub(
+                    p, config.getConfig()
+                        .getString("bungee-support.send-to-hub.server-name")!!
+                )
+            }
         }
         Bukkit.getScoreboardManager()!!.mainScoreboard.objectives.forEach(Objective::unregister)
         WorldManager.getInstance().deleteWorld()
         StatsManager.getInstance().saveStats()
-        mysql.disconnect()
+        if (isMysql) {
+            mysql.disconnect()
+        }
     }
 }
