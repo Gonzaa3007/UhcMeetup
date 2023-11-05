@@ -26,12 +26,12 @@ class VoteManager {
     fun setVote(p: GamePlayer, s: Scenario) {
         if (p.isVotedScen()) {
             if (p.isOnline()) {
-                p.getPlayer().sendMessage(Utils.chat("${pl.prefix}&cYou already voted a Scenario."))
+                p.getPlayer()!!.sendMessage(Utils.chat("${pl.prefix}&cYou already voted a Scenario."))
             }
         } else {
             scensToVote[s] = scensToVote.getOrPut(s){0} + 1
             p.setVoteScen(true)
-            if (p.isOnline()) p.getPlayer().sendMessage(Utils.chat(pl.lang.getConfig().getString("vote-scen")!!.replace("%scenario%", s.getName())))
+            if (p.isOnline()) p.getPlayer()!!.sendMessage(Utils.chat(pl.lang.getConfig().getString("vote-scen")!!.replace("%scenario%", s.getName())))
         }
     }
 

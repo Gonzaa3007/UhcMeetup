@@ -31,8 +31,8 @@ class GamePlayer (var uid: UUID, var name: String) {
         file = PlayerFile.get(uid)
     }
 
-    fun getPlayer(): Player {
-        return Bukkit.getPlayer(uid)!!
+    fun getPlayer(): Player? {
+        return Bukkit.getPlayer(uid)
     }
 
     fun isVotedScen(): Boolean {
@@ -81,7 +81,7 @@ class GamePlayer (var uid: UUID, var name: String) {
         if (isOnline()) {
             val weaponKey = "kits.weapons"
             val armorKey = "kits.armor"
-            val inv = getPlayer().inventory
+            val inv = getPlayer()!!.inventory
             inv.clear()
             inv.setItemInOffHand(ItemStack(Material.SHIELD))
 

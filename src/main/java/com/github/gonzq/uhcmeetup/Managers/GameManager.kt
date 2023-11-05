@@ -50,7 +50,7 @@ open class GameManager {
         pl.pm.getPlayerList().stream().filter(GamePlayer::isOnline).forEach{p ->
             Utils.delay(5) {
                 ScatterManager.getInstance().scatter(p)
-                p.getPlayer().isInvulnerable = true
+                p.getPlayer()!!.isInvulnerable = true
             }
         }
 

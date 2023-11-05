@@ -18,7 +18,7 @@ class VoteGui: FastInv(18, Utils.chat(UhcMeetup.pl.lang.getConfig().getString("v
                 e.isCancelled = true
                 val p = pl.pm.getUhcPlayer(e.whoClicked as Player)
                 game.getVoteScenarios().setVote(p, scen)
-                p.getPlayer().openInventory.close()
+                p.getPlayer()!!.openInventory.close()
             }
         }
 

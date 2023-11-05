@@ -29,7 +29,7 @@ dependencies {
     compileOnly 'com.github.decentsoftware-eu:decentholograms:2.8.3'
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
     implementation 'fr.mrmicky:fastboard:2.0.0'
-    implementation 'fr.mrmicky:fastinv:3.0.4'
+    implementation 'fr.mrmicky:FastInv:3.0.3'
     implementation 'com.jeff_media:SpigotUpdateChecker:3.0.3'
     implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.15'
 }

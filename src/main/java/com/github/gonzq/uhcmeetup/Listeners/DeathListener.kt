@@ -25,7 +25,7 @@ class DeathListener: Listener {
     @EventHandler
     fun onDeath(e: PlayerDeathEvent) {
         val p = pl.pm.getUhcPlayer(e.entity)
-        val killer = p.getPlayer().killer;
+        val killer = p.getPlayer()!!.killer;
         if (game.getState() == GameState.STARTED) {
             if (killer != null) {
                 val k = pl.pm.getUhcPlayer(killer)
@@ -35,8 +35,8 @@ class DeathListener: Listener {
             pl.pm.checkIfRemainingPlayers()
             StatsManager.getInstance().add(p, StatsManager.Stats.DEATHS)
             Utils.delay(1) {
-                p.getPlayer().teleport(Location(world.getMeetupWorld(),0.0,100.0,0.0))
-                p.getPlayer().gameMode = GameMode.SPECTATOR
+                p.getPlayer()!!.teleport(Location(world.getMeetupWorld(),0.0,100.0,0.0))
+                p.getPlayer()!!.gameMode = GameMode.SPECTATOR
             }
         }
     }

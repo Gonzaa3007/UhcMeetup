@@ -43,33 +43,33 @@ class HubListener: Listener {
     fun onJoin(e: PlayerJoinEvent) {
         val p = pl.pm.playerJoinsTheGame(e.player)
         e.joinMessage = Utils.chat(pl.lang.getConfig().getString("player-join")!!.replace("%player%", p.name))
-        pl.boards[p.name] = FastBoard(p.getPlayer())
-        p.getPlayer().maxHealth = 20.0
+        pl.boards[p.name] = FastBoard(p.getPlayer()!!)
+        p.getPlayer()!!.maxHealth = 20.0
         when (game.getState()) {
             GameState.STARTING -> {
                 Utils.delay(1) {
-                    p.getPlayer().level = 0
-                    p.getPlayer().exp = 0f
-                    p.getPlayer().maxHealth = 20.0
-                    p.getPlayer().foodLevel = 20
-                    p.getPlayer().inventory.clear()
-                    p.getPlayer().absorptionAmount = 0.0
-                    p.getPlayer().activePotionEffects.forEach{ep -> p.getPlayer().removePotionEffect(ep.type)}
+                    p.getPlayer()!!.level = 0
+                    p.getPlayer()!!.exp = 0f
+                    p.getPlayer()!!.maxHealth = 20.0
+                    p.getPlayer()!!.foodLevel = 20
+                    p.getPlayer()!!.inventory.clear()
+                    p.getPlayer()!!.absorptionAmount = 0.0
+                    p.getPlayer()!!.activePotionEffects.forEach{ep -> p.getPlayer()!!.removePotionEffect(ep.type)}
                     scatter.scatter(p)
                 }
             }
             GameState.WAITING -> {
                 Utils.delay(1) {
-                    p.getPlayer().level = 0
-                    p.getPlayer().exp = 0f
-                    p.getPlayer().maxHealth = 20.0
-                    p.getPlayer().foodLevel = 20
-                    p.getPlayer().inventory.clear()
-                    p.getPlayer().gameMode = GameMode.SURVIVAL
-                    p.getPlayer().bedSpawnLocation = world.getLobbyLocation()
-                    p.getPlayer().teleport(world.getLobbyLocation())
-                    p.getPlayer().activePotionEffects.forEach {ep -> p.getPlayer().removePotionEffect(ep.type)}
-                    lobbyItems(p.getPlayer())
+                    p.getPlayer()!!.level = 0
+                    p.getPlayer()!!.exp = 0f
+                    p.getPlayer()!!.maxHealth = 20.0
+                    p.getPlayer()!!.foodLevel = 20
+                    p.getPlayer()!!.inventory.clear()
+                    p.getPlayer()!!.gameMode = GameMode.SURVIVAL
+                    p.getPlayer()!!.bedSpawnLocation = world.getLobbyLocation()
+                    p.getPlayer()!!.teleport(world.getLobbyLocation())
+                    p.getPlayer()!!.activePotionEffects.forEach {ep -> p.getPlayer()!!.removePotionEffect(ep.type)}
+                    lobbyItems(p.getPlayer()!!)
                 }
                 if (pl.pm.getPlayerList().stream().filter(GamePlayer::isOnline).toList().size >= pl.config.getConfig().getInt("players-to-start"))
                     game.start()
@@ -77,15 +77,15 @@ class HubListener: Listener {
 
             GameState.FINALIZED, GameState.STARTED -> {
                 Utils.delay(1) {
-                    p.getPlayer().level = 0
-                    p.getPlayer().exp = 0f
-                    p.getPlayer().foodLevel = 20
-                    p.getPlayer().inventory.clear()
-                    p.getPlayer().bedSpawnLocation = world.getLobbyLocation()
-                    p.getPlayer().teleport(Location(world.getMeetupWorld(), 0.0, 100.0, 0.0))
-                    p.getPlayer().gameMode = GameMode.SPECTATOR
+                    p.getPlayer()!!.level = 0
+                    p.getPlayer()!!.exp = 0f
+                    p.getPlayer()!!.foodLevel = 20
+                    p.getPlayer()!!.inventory.clear()
+                    p.getPlayer()!!.bedSpawnLocation = world.getLobbyLocation()
+                    p.getPlayer()!!.teleport(Location(world.getMeetupWorld(), 0.0, 100.0, 0.0))
+                    p.getPlayer()!!.gameMode = GameMode.SPECTATOR
                     p.setState(PlayerState.SPECTATING)
-                    p.getPlayer().activePotionEffects.forEach{ep -> p.getPlayer().removePotionEffect(ep.type)}
+                    p.getPlayer()!!.activePotionEffects.forEach{ep -> p.getPlayer()!!.removePotionEffect(ep.type)}
                 }
             }
         }
@@ -95,15 +95,15 @@ class HubListener: Listener {
     fun onRespawn(e: PlayerRespawnEvent) {
         val p = pl.pm.getUhcPlayer(e.player)
         Utils.delay(5) {
-            p.getPlayer().level = 0
-            p.getPlayer().exp = 0f
-            p.getPlayer().foodLevel = 20
-            p.getPlayer().inventory.clear()
-            p.getPlayer().bedSpawnLocation = world.getLobbyLocation()
-            p.getPlayer().teleport(Location(world.getMeetupWorld(), 0.0, 100.0, 0.0))
-            p.getPlayer().gameMode = GameMode.SPECTATOR
+            p.getPlayer()!!.level = 0
+            p.getPlayer()!!.exp = 0f
+            p.getPlayer()!!.foodLevel = 20
+            p.getPlayer()!!.inventory.clear()
+            p.getPlayer()!!.bedSpawnLocation = world.getLobbyLocation()
+            p.getPlayer()!!.teleport(Location(world.getMeetupWorld(), 0.0, 100.0, 0.0))
+            p.getPlayer()!!.gameMode = GameMode.SPECTATOR
             p.setState(PlayerState.SPECTATING)
-            p.getPlayer().activePotionEffects.forEach{ep -> p.getPlayer().removePotionEffect(ep.type)}
+            p.getPlayer()!!.activePotionEffects.forEach{ep -> p.getPlayer()!!.removePotionEffect(ep.type)}
         }
     }
 

@@ -29,7 +29,7 @@ class ConsumeListener: Listener {
         }
 
         if (e.item.isSimilar(Utils.goldenHead())) {
-            p.getPlayer().addPotionEffect(PotionEffect(PotionEffectType.REGENERATION,200,1))
+            p.getPlayer()!!.addPotionEffect(PotionEffect(PotionEffectType.REGENERATION,200,1))
         }
     }
 }

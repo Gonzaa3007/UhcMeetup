@@ -23,7 +23,7 @@ class ScatterManager {
     }
 
     fun scatter(p: GamePlayer) {
-        val player = p.getPlayer()
+        val player = p.getPlayer()!!
         player.teleport(calculateCoords(), PlayerTeleportEvent.TeleportCause.PLUGIN)
         player.addPotionEffect(PotionEffect(PotionEffectType.BLINDNESS, 120000, 5))
         player.addPotionEffect(PotionEffect(PotionEffectType.SLOW, 120000, 127))
@@ -37,9 +37,9 @@ class ScatterManager {
     }
 
     fun postScatter(p: GamePlayer) {
-        p.getPlayer().activePotionEffects.forEach { pe -> p.getPlayer().removePotionEffect(pe.type) }
+        p.getPlayer()!!.activePotionEffects.forEach { pe -> p.getPlayer()!!.removePotionEffect(pe.type) }
         p.setState(PlayerState.PLAYING)
-        p.getPlayer().isInvulnerable = false
+        p.getPlayer()!!.isInvulnerable = false
         StatsManager.getInstance().add(p, StatsManager.Stats.PLAYED)
     }
 
