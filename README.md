@@ -1,44 +1,53 @@
+
 ## UhcMeetup
-[Download](https://www.spigotmc.org/resources/uhc-meetup-1-17.107429/)
 
-# Information
-- Author: Gonzq
-- Discord: ! Gonzq#4451
-- Minecraft Version: 1.17 & 1.17.1
+A very customizable UhcMeetup plugin for current Minecraft Versions!
+
+
+
+
+## Features
+
+- MC Version: 1.17.x
 - Plugin Version: 1.2
-- [Proyect](https://github.com/users/asdjajalol/projects/2)
+- Stats & Leaderboard
+- Scenarios & Vote Scenarios system
+- MySQL compatibility
+- Customizable messages, config, scoreboard and kits
+- Random kits
 
-# Features
-* UHC Meetups Automatics
-* Customizable messages, config, scoreboard and kits
-* Vote Scenarios system
-* Stats system
-* Random Kits
 
-# Commands
-```/vote```
+## Commands
+`/vote`
 - Open the Vote GUI
 
-```/stats <player>```
-- Open the Stats GUI
+`/stats <player>`
+- See a player stats
 
-```/topstats```
+`/topstats`
 - Open the TopStats GUI
 
-```/uhcmeetup setlobby```
+`/uhcmeetup setlobby`
 - Sets the spawn
 
-```/uhcmeetup reload```
+`/uhcmeetup reload`
 - Reload all configs
 
-```/forcestart```
-- Starts a Meetup
-# Permissions
+`/forcestart`
+- Starts the Meetup
+
+## Permissions
+
 - meetup.admin
 - meetup.vote
 - meetup.forcestart
+## Bug report or suggests
+You can post a suggestion or a bug in the [issue](https://github.com/Gonzaa3007/UhcMeetup/issues) section in this repository.
+## Support
 
-# Bug Report
-[here](https://github.com/asdjajalol/UhcMeetup/issues)
-# Support
 [If you like support me :innocent:](https://paypal.me/gonza3007)
+## Author
+
+- [@! Gonzq](https://discord.com/users/411654061385842689)
+
+
